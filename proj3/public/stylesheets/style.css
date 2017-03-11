@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
 }
 
 a {
@@ -8,6 +9,8 @@ a {
 }
 
 .image img {
-    width: 80%;
     height: auto;
+    display: block;
+    margin: auto;
+    width: 70%;
 }
