@@ -5,7 +5,9 @@ body {
 }
 
 a {
-  color: #00B7FF;
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
 }
 
 .image img {
@@ -13,4 +15,21 @@ a {
     display: block;
     margin: auto;
     width: 70%;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+}
+.card img {
+    height: auto;
+    display: block;
+    margin: auto;
+    max-width: 300px;
+}
+
+.container {
+    padding: 0 16px;
 }
