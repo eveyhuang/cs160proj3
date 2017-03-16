@@ -1,0 +1,40 @@
+{
+  "intents": [
+    {
+      "intent": "SelectKnownRecipeIntent",
+      "slots": [
+      {
+        "name" : "Recipe",
+        "type": "LIST_OF_KNOWN_RECIPES"
+      }
+     ]
+    },
+    {
+      "intent": "GetIngredientsIntent"
+    },
+    {
+      "intent": "GetRecipeDirectionsIntent"
+    },
+    {
+      "intent": "LastItemIntent"
+    },
+    {
+      "intent": "AMAZON.Food"
+    },
+    {
+      "intent": "AMAZON.StartOverIntent"
+    },
+    {
+      "intent": "AMAZON.NextIntent"
+    },
+    {
+      "intent": "AMAZON.PreviousIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+  ]
+}

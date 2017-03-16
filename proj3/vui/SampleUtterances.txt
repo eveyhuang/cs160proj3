@@ -1,0 +1,29 @@
+SelectKnownRecipeIntent find {Recipe}
+SelectKnownRecipeIntent I'd like to make {Recipe}
+SelectKnownRecipeIntent let's make {Recipe}
+SelectKnownRecipeIntent I want to make {Recipe}
+SelectKnownRecipeIntent get {Recipe}
+
+GetIngredientsIntent ingredients 
+GetIngredientsIntent what are the ingredients
+GetIngredientsIntent get ingredients
+GetIngredientsIntent read ingredients
+GetIngredientsIntent start with ingredients
+
+GetRecipeDirectionsIntent start with recipe
+GetRecipeDirectionsIntent recipe directions
+GetRecipeDirectionsIntent recipe
+GetRecipeDirectionsIntent what are the recipe directions
+GetRecipeDirectionsIntent what is the recipe
+GetRecipeDirectionsIntent get recipe
+GetRecipeDirectionsIntent read recipe
+
+LastItemIntent last
+LastItemIntent last ingredient
+LastItemIntent last recipe
+
+AMAZON.HelpIntent what can I say
+AMAZON.HelpIntent what can I do
+
+AMAZON.StopIntent quit
+AMAZON.StopIntent main menu
