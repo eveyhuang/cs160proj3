@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<script src="post_files/jquery.js"></script>
+<script>
+$(document).ready(function(){
+	$("#getReq").click(function(){
+	  $.ajax({
+		  url: 'https://ufn86g6j5b.execute-api.us-east-1.amazonaws.com/prod/RecipeUpdate?TableName=Recipes',
+		  type: 'POST',
+		  data: JSON.stringify({"TableName": "Recipes", "Item": { "RecipeName":"Cheese and Crackers", "Ingredients":"Cheese\nCrackers", "Directions":"Open The Cracker Box\nSpread Cheese on Crackers"}}),
+		  success: function(data) {
+			alert("POSTed successfully");
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert("Error");
+			}
+		});
+	});
+});
+</script>
+</head>
+<body>
+<div>
+<button id="getReq">Send HTTP POST request to a AWS</button>
+</div>
+
+</body></html>

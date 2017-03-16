@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#getReq").click(function(){
+        $.get("https://af2co5hti4.execute-api.us-east-1.amazonaws.com/prod/RecipeUpdate?TableName=Recipes", function(data, status){
+        //    alert("Data: " + data + "\nStatus: " + status);
+            $("#result").text(JSON.stringify(data)  );
+        });
+      });
+    });
+</script>
+</head>
+<body>
+<div>
+  <br>
+<button id="getReq">Send HTTP GET request to a AWS and get result</button>
+<br>
+</div>
+<div id="result">
+  Result
+</div>
+</body>
+</html>
