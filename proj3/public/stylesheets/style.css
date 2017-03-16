@@ -4,6 +4,7 @@ body {
   text-align: center;
 }
 
+
 a {
     text-decoration: none;
     font-size: 12px;
@@ -11,25 +12,84 @@ a {
 }
 
 .image img {
+    display:inline-block;
     height: auto;
-    display: block;
     margin: auto;
     width: 70%;
 }
-
-.card {
+.allcards {
+    margin: 30px;
+}
+.card1 {
+    display:inline-block;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
-    margin: auto;
+    margin: 30px;
     text-align: center;
+    border-radius: 5px;
 }
-.card img {
+
+.card2 {
+    display:inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: 30px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.card3 {
+    display:inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: 30px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+
+.card1 img {
+    height: auto;
+    display: block;
+    margin: auto;
+    max-width: 300px;
+}
+.card2 img {
+    height: auto;
+    display: block;
+    margin: auto;
+    max-width: 300px;
+}
+.card3 img {
     height: auto;
     display: block;
     margin: auto;
     max-width: 300px;
 }
 
+.title {
+    color: grey;
+    font-size: 18px;
+}
+
 .container {
-    padding: 0 16px;
+    padding: 2px 16px;
+}
+
+.iconbar {
+    display:inline-block;
+    width: 50px; 
+    background-color: white; /* Dark-grey background */
+}
+
+.iconbar a {
+    display: inline-block;
+    text-align: center;
+    padding: 5px; 
+    color: grey; 
+    font-size: 10px; 
+}
+
+.fa-li {
+    font-size: 10px;
 }
