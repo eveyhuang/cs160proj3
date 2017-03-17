@@ -19,9 +19,6 @@
       "intent": "LastItemIntent"
     },
     {
-      "intent": "AMAZON.Food"
-    },
-    {
       "intent": "AMAZON.StartOverIntent"
     },
     {
@@ -35,6 +32,6 @@
     },
     {
       "intent": "AMAZON.StopIntent"
-    },
+    }
   ]
 }

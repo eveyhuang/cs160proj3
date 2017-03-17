@@ -83,6 +83,7 @@ function onIntent(intentRequest, session, callback) {
 
     if ("AMAZON.HelpIntent" === intentName) {
         handleGetHelpRequest(intent, session, callback);
+        }
     else if (session.attributes && session.attributes.isRecipeDialog) {
         handleRecipeDialogRequest(intent, session, callback);
     } else if (session.attributes && session.attributes.isRecipeDirectionsDialog) {
@@ -94,6 +95,7 @@ function onIntent(intentRequest, session, callback) {
     } else {
         throw "Invalid intent";
     }
+
 }
 
 /**
