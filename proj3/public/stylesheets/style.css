@@ -93,3 +93,33 @@ a {
 .fa-li {
     font-size: 10px;
 }
+
+.list {
+    list-style-type: none;
+    border: 1px solid #eee;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.list .dish {
+    font-size: 25px;
+}
+
+.list li {
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+}
+
+.list .title {
+    background-color: #eee;
+    font-size: 20px;
+}
+
+.design {
+    display:inline-block;
+    width: 33.3%;
+    padding: 8px;
+}
