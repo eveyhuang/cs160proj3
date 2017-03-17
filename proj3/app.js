@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var muesliingre = require('./routes/muesliingre');
+
 var app = express();
 
 // view engine setup
@@ -25,8 +25,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/index', index);
 
-app.get('/muesliingre', function (req, res, next) {
-  res.render('muesliingre');
+app.get('/mueslisteps', function (req, res, next) {
+  res.render('mueslisteps');
+});
+
+app.get('/pumpsteps', function (req, res, next) {
+  res.render('easypotatodahl');
+});
+
+app.get('/chocolatesteps', function (req, res, next) {
+  res.render('chocolatesteps');
 });
 
 // catch 404 and forward to error handler
