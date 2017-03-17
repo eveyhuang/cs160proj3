@@ -5,8 +5,7 @@ body {
 }
 
 
-a {
-    
+a {  
     text-decoration: none;
     font-size: 12px;
     color: black;
@@ -110,7 +109,7 @@ li {
 h3 {
     font-size: 30px;
     color: grey;
-
+}
 .list {
     list-style-type: none;
     border: 1px solid #eee;
@@ -133,6 +132,7 @@ h3 {
 .list .title {
     background-color: #eee;
     font-size: 20px;
+    margin:10px;
 }
 
 .design {

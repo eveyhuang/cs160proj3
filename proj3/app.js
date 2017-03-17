@@ -37,6 +37,9 @@ app.get('/chocolatesteps', function (req, res, next) {
   res.render('chocolatesteps');
 });
 
+app.get('/muesliingre', function (req, res, next) {
+  res.render('muesliingre');
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
