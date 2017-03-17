@@ -102,6 +102,7 @@ a {
     font-size: 10px;
 }
 
+<<<<<<< HEAD
 li {
     list-style-type: none;
 }
@@ -109,4 +110,34 @@ li {
 h3 {
     font-size: 30px;
     color: grey;
+=======
+.list {
+    list-style-type: none;
+    border: 1px solid #eee;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.list .dish {
+    font-size: 25px;
+}
+
+.list li {
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+}
+
+.list .title {
+    background-color: #eee;
+    font-size: 20px;
+}
+
+.design {
+    display:inline-block;
+    width: 33.3%;
+    padding: 8px;
+>>>>>>> f2b7fd417823afc1f072218b472f3c39a2389fd0
 }
