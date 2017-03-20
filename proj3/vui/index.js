@@ -161,9 +161,7 @@ function handleMainMenuRequest(intent, session, callback) {
     var params = {
         TableName: "Recipes",
         Key: {
-            "RecipeName": {
-                S: item;
-            }
+            "RecipeName": item
         },
     };
 
