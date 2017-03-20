@@ -10,7 +10,6 @@ var index = require('./routes/index');
 var muesliingre = require('./routes/muesliingre');
 var chocoingre = require('./routes/chocoingre');
 var dahlingre = require('./routes/dahlingre');
-
 var app = express();
 
 // view engine setup
