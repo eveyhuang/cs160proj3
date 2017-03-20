@@ -150,14 +150,10 @@ function handleMainMenuRequest(intent, session, callback) {
         var item = intent.slots.FoodRecipe.value;
     }
 
-    // Hard coding the recipe stuff, I commented what would happen tho.
-    // Normally we would only need to grab "item" then...
-    // ideally we'd fetch these values (recipe, ingredients, directions) from the dict...
-
     var params = {
-        TableName: "Recipes",
-        Key: {
-            "RecipeName": item,
+        "TableName": "Recipes",
+        "Key": {
+            "RecipeName": item
         },
     };
     var recipe = dynamo.getItem(params);
