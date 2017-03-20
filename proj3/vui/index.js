@@ -156,23 +156,17 @@ function handleMainMenuRequest(intent, session, callback) {
             "RecipeName": item
         },
     };
-    var recipe = dynamo.getItem(params);
+    dynamo.getItem(params, function(err, data) {
+        if (data) {
+            var recipe = data.Item;
+        } else {
+            var recipe = false;
+        }
+    });
     if (recipe) {
         // We have a valid recipe item, so we need to set it so we'll actually go there now
         var cache = [];
-        // circular removal from https://stackoverflow.com/questions/11616630/json-stringify-avoid-typeerror-converting-circular-structure-to-json
-        JSON.stringify(recipe, function(key, value) {
-            if (typeof value === 'object' && value !== null) {
-                if (cache.indexOf(value) !== -1) {
-                    // Circular reference found, discard key
-                    return;
-                }
-                // Store value in our collection
-                cache.push(value);
-            }
-            return value;
-        });
-        cache = null
+        JSON.stringify(recipe);
         session.attributes.isRecipeDialog = true;
         session.attributes.recipe = item;
         // Probably would be a list of ingredients instead of hard coded list
