@@ -1,8 +1,8 @@
-/**
- * Adapted from Amazon's Alexa Skill samples, specifically ReindeerGames.
- */
-
 'use strict';
+
+const doc = require('dynamodb-doc');
+
+const dynamo = new doc.DynamoDB();
 
 // Route the incoming request based on type (LaunchRequest, IntentRequest,
 // etc.) The JSON body of the request is provided in the event parameter.
@@ -44,8 +44,6 @@ exports.handler = function (event, context) {
     }
 };
 
-// A dictionary mapping recipe names to a list of a list of ingredients and a list of directions.
-var recipeBook = {}
 
 /**
  * Called when the session starts.
@@ -55,10 +53,6 @@ function onSessionStarted(sessionStartedRequest, session) {
         + ", sessionId=" + session.sessionId);
 
     // add any session init logic here
-    // Here is where we would populate a dictionary of the recipes, ingredients, and the directions
-    // For now, you get sad face
-    // （（●´∧｀●））
-    recipeBook = {};
 }
 
 /**
@@ -88,7 +82,7 @@ function onIntent(intentRequest, session, callback) {
         handleRecipeDialogRequest(intent, session, callback);
     } else if (session.attributes && session.attributes.isRecipeDirectionsDialog) {
         handleRecipeDirectionsRequest(intent, session, callback);
-    } else if ("SelectKnownRecipeIntent" === intentName) {
+    } else if ("SelectKnownDessertRecipeIntent" === intentName || "SelectKnownFoodRecipeIntent" === intentName) {
         handleMainMenuRequest(intent, session, callback);
     } else if ("AMAZON.StopIntent" === intentName) { // quit if at main menu (implied from not being at recipe or recipe dir dialog)
         handleFinishSessionRequest(intent, session, callback);
@@ -129,21 +123,30 @@ function getWelcomeResponse(callback) {
 
 function handleMainMenuRequest(intent, session, callback) {
     // Parses "i need help with {item}" answer and calls appropriate function
-    var item = intent.slots.Recipe.value.toLowerCase(),
+    var item = intent.slots.Recipe.value,
         valid_item = intent.slots && intent.slots.Recipe && intent.slots.Recipe.value;
 
     // Hard coding the recipe stuff, I commented what would happen tho.
     // Normally we would only need to grab "item" then...
     // ideally we'd fetch these values (recipe, ingredients, directions) from the dict...
 
-    if (valid_item) {
+    var params = {
+        TableName: "Recipes",
+        Key: {
+            "RecipeName": item,
+        },
+    };
+    var recipe = dynamo.getItem(params);
+    if (valid_item || recipe) {
         // We have a valid recipe item, so we need to set it so we'll actually go there now
+        recipe = JSON.stringify(recipe);
         session.attributes.isRecipeDialog = true;
         session.attributes.recipe = item;
         // Probably would be a list of ingredients instead of hard coded list
-        session.attributes.ingredients = ["2 Apples", "3 Bananas", "A heart full of dreams"];
+        session.attributes.ingredients = recipe["Ingredients"].split("\n");
+
         // Probably would be a list of directions instead of hard coded list
-        session.attributes.directions = ["Eat the apples.", "Eat the bananas.", "Eat your dreams."];
+        session.attributes.directions = recipe["Directions"].split("\n");
         session.attributes.index = 0;
         // will be used to signify that the user is going through the ingredients list
         session.attributes.isIngredientsList = false;

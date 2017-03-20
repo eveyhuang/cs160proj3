@@ -1,8 +1,14 @@
-SelectKnownRecipeIntent find {Recipe}
-SelectKnownRecipeIntent I'd like to make {Recipe}
-SelectKnownRecipeIntent let's make {Recipe}
-SelectKnownRecipeIntent I want to make {Recipe}
-SelectKnownRecipeIntent get {Recipe}
+SelectKnownFoodRecipeIntent find {Recipe}
+SelectKnownFoodRecipeIntent I'd like to make {Recipe}
+SelectKnownFoodRecipeIntent let's make {Recipe}
+SelectKnownFoodRecipeIntent I want to make {Recipe}
+SelectKnownFoodRecipeIntent get {Recipe}
+
+SelectKnownDessertRecipeIntent find {Recipe}
+SelectKnownDessertRecipeIntent I'd like to make {Recipe}
+SelectKnownDessertRecipeIntent let's make {Recipe}
+SelectKnownDessertRecipeIntent I want to make {Recipe}
+SelectKnownDessertRecipeIntent get {Recipe}
 
 GetIngredientsIntent ingredients 
 GetIngredientsIntent what are the ingredients
