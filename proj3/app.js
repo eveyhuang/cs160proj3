@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var muesliingre = require('./routes/muesliingre');
+var chocoingre = require('./routes/chocoingre');
+var dahlingre = require('./routes/dahlingre');
 var app = express();
 
 // view engine setup
@@ -28,6 +30,10 @@ app.use('/index', index);
 app.get('/muesliingre', function (req, res, next) {
   res.render('muesliingre');
 });
+
+app.get('/chocoingre', function (req, res, next) {res.render('chocoingre');});
+
+app.get('/dahlingre', function (req, res, next) {res.render('dahlingre');});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
