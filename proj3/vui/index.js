@@ -4,6 +4,7 @@ const doc = require('dynamodb-doc');
 
 const dynamo = new doc.DynamoDB();
 
+var x;
 // Route the incoming request based on type (LaunchRequest, IntentRequest,
 // etc.) The JSON body of the request is provided in the event parameter.
 exports.handler = function (event, context) {
@@ -14,7 +15,6 @@ exports.handler = function (event, context) {
          * Uncomment this if statement and populate with your skill's application ID to
          * prevent someone else from configuring a skill that sends requests to this function.
          */
-
         if (event.session.application.applicationId !== "amzn1.ask.skill.285c82d7-ea01-4b7f-96bd-9cd3f813fae0") {
             context.fail("Invalid Application ID");
         }
@@ -30,6 +30,16 @@ exports.handler = function (event, context) {
                     context.succeed(buildResponse(sessionAttributes, speechletResponse));
                 });
         } else if (event.request.type === "IntentRequest") {
+            console.log("attempting to fetch");
+            dynamo.scan({ TableName: "Recipes"}, function(err, data) {
+                if (err) {
+                    console.log("Unable to get data.", err); // an error occurred
+                } else {
+                    console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
+                    x = data;
+                }
+            });
+            console.log("output", x);
             onIntent(event.request,
                 event.session,
                 function callback(sessionAttributes, speechletResponse) {
@@ -153,29 +163,14 @@ function handleMainMenuRequest(intent, session, callback) {
     var params = {
         TableName: "Recipes",
         Key: {
-            "RecipeName": item
+            "RecipeName": {
+                S: item;
+            }
         },
     };
 
-    var recipe = false;
-    dynamo.getItem(params, function(err, data) {
-        if (err) {
-            console.log("Unable to get data.", err); // an error occurred
-        } else {
-            console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
-            recipe = data;
-        }
-    });
-    console.log("Current recipe after getItem:", recipe);
-    dynamo.scan({TableName: "Recipes"}, function(err, data) {
-        if (err) {
-            console.log("Unable to get data.", err); // an error occurred
-        } else {
-            console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
-            recipe = data;
-        }
-    });
-    console.log("Current recipe after scan:", recipe);
+    var recipe = x;
+    console.log(recipe);
 
     if (recipe) {
         // We have a valid recipe item, so we need to set it so we'll actually go there now
