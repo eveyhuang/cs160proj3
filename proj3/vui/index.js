@@ -143,7 +143,7 @@ function handleBlankRequest(callback) {
     }
 
 var x = false;
-function pull(data, recipe) {
+function pull(data) {
     console.log(data);
     x = data;
 }
