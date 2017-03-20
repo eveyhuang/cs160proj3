@@ -4,7 +4,7 @@
       "intent": "SelectKnownFoodRecipeIntent",
       "slots": [
       {
-        "name" : "Recipe",
+        "name" : "FoodRecipe",
         "type": "AMAZON.Food",
       }
      ]
@@ -13,7 +13,7 @@
       "intent": "SelectKnownDessertRecipeIntent",
       "slots": [
       {
-        "name" : "Recipe",
+        "name" : "DessertRecipe",
         "type": "AMAZON.Dessert",
       }
      ]
