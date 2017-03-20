@@ -144,8 +144,11 @@ function handleBlankRequest(callback) {
 
 function handleMainMenuRequest(intent, session, callback) {
     // Parses "i need help with {item}" answer and calls appropriate function
-    var item = intent.slots.Recipe.value,
-        valid_item = intent.slots && intent.slots.Recipe && intent.slots.Recipe.value;
+    if ("SelectKnownDessertRecipeIntent" === intentName) {
+        var item = intent.slots.DessertRecipe.value;
+    } else {
+        var item = intent.slots.FoodRecipe.value;
+    }
 
     // Hard coding the recipe stuff, I commented what would happen tho.
     // Normally we would only need to grab "item" then...
@@ -158,7 +161,7 @@ function handleMainMenuRequest(intent, session, callback) {
         },
     };
     var recipe = dynamo.getItem(params);
-    if (valid_item || recipe) {
+    if (recipe) {
         // We have a valid recipe item, so we need to set it so we'll actually go there now
         recipe = JSON.stringify(recipe);
         session.attributes.isRecipeDialog = true;
