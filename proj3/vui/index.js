@@ -156,11 +156,10 @@ function handleMainMenuRequest(intent, session, callback) {
             "RecipeName": item
         },
     };
+    var recipe = false;
     dynamo.getItem(params, function(err, data) {
         if (data) {
-            var recipe = data.Item;
-        } else {
-            var recipe = false;
+            recipe = data.Item;
         }
     });
     if (recipe) {
