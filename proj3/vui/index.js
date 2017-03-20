@@ -158,13 +158,13 @@ function handleMainMenuRequest(intent, session, callback) {
     };
     var recipe = false;
     dynamo.getItem(params, function(err, data) {
+        console.log(data);
         if (data) {
             recipe = data.Item;
         }
     });
     if (recipe) {
         // We have a valid recipe item, so we need to set it so we'll actually go there now
-        var cache = [];
         JSON.stringify(recipe);
         session.attributes.isRecipeDialog = true;
         session.attributes.recipe = item;
