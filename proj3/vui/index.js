@@ -15,9 +15,9 @@ exports.handler = function (event, context) {
          * prevent someone else from configuring a skill that sends requests to this function.
          */
 
-        /*if (event.session.application.applicationId !== "amzn1.ask.skill.f53f9cd6-6e6b-42ec-90b8-44cd6ffe65d2") {
+        if (event.session.application.applicationId !== "amzn1.ask.skill.298c8138-7fcc-4f6d-b063-f75e4a977228") {
             context.fail("Invalid Application ID");
-        }*/
+        }
 
         if (event.session.new) {
             onSessionStarted({requestId: event.request.requestId}, event.session);
@@ -38,7 +38,15 @@ exports.handler = function (event, context) {
         } else if (event.request.type === "SessionEndedRequest") {
             onSessionEnded(event.request, event.session);
             context.succeed();
-        }
+        } else if (event.request == null) {
+            handleBlankRequest(
+            function callback(sessionAttributes, speechletResponse) {
+                context.succeed(buildResponse(sessionAttributes, speechletResponse));
+                });
+            }
+
+
+
     } catch (e) {
         context.fail("Exception: " + e);
     }
@@ -77,7 +85,7 @@ function onIntent(intentRequest, session, callback) {
 
     if ("AMAZON.HelpIntent" === intentName) {
         handleGetHelpRequest(intent, session, callback);
-        }
+    }
     else if (session.attributes && session.attributes.isRecipeDialog) {
         handleRecipeDialogRequest(intent, session, callback);
     } else if (session.attributes && session.attributes.isRecipeDirectionsDialog) {
@@ -89,7 +97,6 @@ function onIntent(intentRequest, session, callback) {
     } else {
         throw "Invalid intent";
     }
-
 }
 
 /**
@@ -120,6 +127,20 @@ function getWelcomeResponse(callback) {
     callback(sessionAttributes,
         buildSpeechletResponse(CARD_TITLE, speechOutput, repromptText, shouldEndSession));
 }
+
+function handleBlankRequest(callback) {
+    var sessionAttributes = {},
+            speechOutput = "I'm sorry, I couldn't hear that.",
+            shouldEndSession = false,
+            repromptText = "How can I help you?";
+
+        sessionAttributes = {
+            "speechOutput": speechOutput,
+            "repromptText": repromptText,
+        };
+        callback(sessionAttributes,
+            buildSpeechletResponse(CARD_TITLE, speechOutput, repromptText, shouldEndSession));
+    }
 
 function handleMainMenuRequest(intent, session, callback) {
     // Parses "i need help with {item}" answer and calls appropriate function
