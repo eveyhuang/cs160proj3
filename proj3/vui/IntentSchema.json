@@ -5,7 +5,7 @@
       "slots": [
       {
         "name" : "FoodRecipe",
-        "type": "AMAZON.Food",
+        "type": "AMAZON.Food"
       }
      ]
     },
@@ -14,7 +14,7 @@
       "slots": [
       {
         "name" : "DessertRecipe",
-        "type": "AMAZON.Dessert",
+        "type": "AMAZON.Dessert"
       }
      ]
     },
