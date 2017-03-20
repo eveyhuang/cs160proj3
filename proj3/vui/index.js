@@ -151,14 +151,14 @@ function handleMainMenuRequest(intent, session, callback) {
     }
 
     var params = {
-        "TableName": "Recipes",
-        "Key": {
+        TableName: "Recipes",
+        Key: {
             "RecipeName": item
         },
     };
 
     var recipe = false;
-    dynamo.get(params, function(err, data) {
+    dynamo.getItem(params, function(err, data) {
         if (err) {
             console.log("Unable to get data.", err); // an error occurred
         } else {
@@ -166,6 +166,16 @@ function handleMainMenuRequest(intent, session, callback) {
             recipe = data;
         }
     });
+    console.log("Current recipe:", recipe);
+    dynamo.scan(params, function(err, data) {
+        if (err) {
+            console.log("Unable to get data.", err); // an error occurred
+        } else {
+            console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
+            recipe = data;
+        }
+    });
+    console.log("Current recipe");
 
     if (recipe) {
         // We have a valid recipe item, so we need to set it so we'll actually go there now
