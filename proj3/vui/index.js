@@ -156,6 +156,19 @@ function handleMainMenuRequest(intent, session, callback) {
             "RecipeName": item
         },
     };
+    const done = (err, res) => callback(null, {
+            statusCode: err ? '400' : '200',
+            body: err ? err.message : JSON.stringify(res),
+            headers: {
+                'Access-Control-Allow-Headers': 'x-Requested-With',
+                'Access-Control-Allow-Origin': '*',
+                "Access-Control-Allow-Credentials" : true,
+                'Content-Type': 'application/json',
+            },
+        });
+    dynamo.scan({ TableName: event.queryStringParameters.TableName }, done);
+    console.log(done);
+
     var recipe = false;
     dynamo.getItem(params, function(err, data) {
         if (err) {
@@ -166,6 +179,11 @@ function handleMainMenuRequest(intent, session, callback) {
             recipe = res;
         }
     });
+
+    var sample;
+    dynamo.getItem(params, sample);
+    console.log(sample);
+
     if (recipe) {
         // We have a valid recipe item, so we need to set it so we'll actually go there now
         JSON.stringify(recipe);
