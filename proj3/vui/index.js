@@ -163,14 +163,14 @@ function handleMainMenuRequest(intent, session, callback) {
     var recipe = dynamo.getItem(params);
     if (recipe) {
         // We have a valid recipe item, so we need to set it so we'll actually go there now
-        recipe = JSON.stringify(recipe);
+        var recipeDetails = JSON.stringify(recipe);
         session.attributes.isRecipeDialog = true;
         session.attributes.recipe = item;
         // Probably would be a list of ingredients instead of hard coded list
-        session.attributes.ingredients = recipe["Ingredients"].split("\n");
+        session.attributes.ingredients = recipeDetails["Ingredients"].split("\n");
 
         // Probably would be a list of directions instead of hard coded list
-        session.attributes.directions = recipe["Directions"].split("\n");
+        session.attributes.directions = recipeDetails["Directions"].split("\n");
         session.attributes.index = 0;
         // will be used to signify that the user is going through the ingredients list
         session.attributes.isIngredientsList = false;
