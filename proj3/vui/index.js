@@ -4,7 +4,15 @@ const doc = require('dynamodb-doc');
 
 const dynamo = new doc.DynamoDB();
 
-var x;
+var AWS = require("aws-sdk");
+
+AWS.config.update({
+    region: "us-west-2",
+    endpoint: "http://localhost:8000"
+});
+
+var docClient = new AWS.DynamoDB.DocumentClient();
+
 // Route the incoming request based on type (LaunchRequest, IntentRequest,
 // etc.) The JSON body of the request is provided in the event parameter.
 exports.handler = function (event, context) {
@@ -30,16 +38,6 @@ exports.handler = function (event, context) {
                     context.succeed(buildResponse(sessionAttributes, speechletResponse));
                 });
         } else if (event.request.type === "IntentRequest") {
-            console.log("attempting to fetch");
-            dynamo.scan({ TableName: "Recipes"}, function(err, data) {
-                if (err) {
-                    console.log("Unable to get data.", err); // an error occurred
-                } else {
-                    console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
-                    x = data;
-                }
-            });
-            console.log("output", x);
             onIntent(event.request,
                 event.session,
                 function callback(sessionAttributes, speechletResponse) {
@@ -169,7 +167,16 @@ function handleMainMenuRequest(intent, session, callback) {
         },
     };
 
-    var recipe = x;
+    var recipe = false;
+    console.log("Doing docClient with node.js");
+    docClient.get(params, function(err, data) {
+        if (err) {
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
+            recipe = data;
+        }
+    });
     console.log(recipe);
 
     if (recipe) {
