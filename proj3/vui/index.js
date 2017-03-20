@@ -166,8 +166,8 @@ function handleMainMenuRequest(intent, session, callback) {
             recipe = data;
         }
     });
-    console.log("Current recipe:", recipe);
-    dynamo.scan(params, function(err, data) {
+    console.log("Current recipe after getItem:", recipe);
+    dynamo.scan({TableName: "Recipes"}, function(err, data) {
         if (err) {
             console.log("Unable to get data.", err); // an error occurred
         } else {
@@ -175,7 +175,7 @@ function handleMainMenuRequest(intent, session, callback) {
             recipe = data;
         }
     });
-    console.log("Current recipe");
+    console.log("Current recipe after scan:", recipe);
 
     if (recipe) {
         // We have a valid recipe item, so we need to set it so we'll actually go there now
