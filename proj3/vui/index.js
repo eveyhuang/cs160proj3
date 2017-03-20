@@ -3,22 +3,24 @@
 const doc = require('dynamodb-doc');
 
 const dynamo = new doc.DynamoDB();
-
-var AWS = require("aws-sdk");
-
-AWS.config.update({
-    region: "us-west-2",
-    endpoint: "http://localhost:8000"
-});
-
-var docClient = new AWS.DynamoDB.DocumentClient();
-
+var recipes_dict = {};
 // Route the incoming request based on type (LaunchRequest, IntentRequest,
 // etc.) The JSON body of the request is provided in the event parameter.
 exports.handler = function (event, context) {
     try {
         console.log("event.session.application.applicationId=" + event.session.application.applicationId);
 
+        dynamo.scan({TableName : "Recipes"}, function(err, data) {
+            if (err) {
+                context.fail("something went wrong with getting the table");
+            }
+            for (var i in data.Items) {
+                i = data.Items[i];
+                const name = i['RecipeName'];
+                recipes_dict[name] = i;
+                console.log(JSON.stringify(i));
+            }
+        });
         /**
          * Uncomment this if statement and populate with your skill's application ID to
          * prevent someone else from configuring a skill that sends requests to this function.
@@ -159,17 +161,17 @@ function handleMainMenuRequest(intent, session, callback) {
     }
 
     var params = {
-        TableName: "Recipes",
-        Key: {
+        TableName : "Recipes",
+        Key : {
             "RecipeName": item
         },
     };
 
     var recipe = false;
-    console.log("Doing docClient with node.js");
-    docClient.get(params, function(err, data) {
+    console.log("Trying");
+    dynamo.getItem(params, function(err, data) {
         if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+            throw("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
             recipe = data;
