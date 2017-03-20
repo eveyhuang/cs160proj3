@@ -144,7 +144,7 @@ function handleBlankRequest(callback) {
 
 function handleMainMenuRequest(intent, session, callback) {
     // Parses "i need help with {item}" answer and calls appropriate function
-    if ("SelectKnownDessertRecipeIntent" === intentName) {
+    if ("SelectKnownDessertRecipeIntent" === intent.name) {
         var item = intent.slots.DessertRecipe.value;
     } else {
         var item = intent.slots.FoodRecipe.value;
