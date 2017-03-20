@@ -158,9 +158,12 @@ function handleMainMenuRequest(intent, session, callback) {
     };
     var recipe = false;
     dynamo.getItem(params, function(err, data) {
-        console.log(data);
-        if (data) {
-            recipe = data.Item;
+        if (err) {
+            console.log(err); // an error occurred
+        } else {
+            console.log(data); // successful response
+            res.send(data);
+            recipe = res;
         }
     });
     if (recipe) {
