@@ -29,6 +29,14 @@ app.get('/mueslisteps', function (req, res, next) {
   res.render('mueslisteps');
 });
 
+app.get('/test', function (req, res, next) {
+  res.render('test');
+});
+
+app.get('/add', function (req, res, next) {
+  res.render('add');
+});
+
 app.get('/pumpsteps', function (req, res, next) {
   res.render('easypotatodahl');
 });

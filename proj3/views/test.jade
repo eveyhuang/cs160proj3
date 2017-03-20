@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script.
+      $(document).ready(function(){
+      var theUrl = "https://af2co5hti4.execute-api.us-east-1.amazonaws.com/prod/RecipeUpdate?TableName=Recipes"
+      $("#post_button").click(function(){
+      $.post(theUrl, JSON.stringify({
+      "type": "POST",
+      "data": {
+      "TableName": "Recipes",
+      //New item information to be posted
+      "Item": {
+      "RecipeName":"Zootopia",
+      "Ingredients": "animals"}}}),
+      function(data, status){
+      alert(status);
+      })
+      });
+      })
+  body
+    .get_requests
+      | GET Requests
+      br
+      |     
+      button#get_button Send an HTTP GET request the entire database
+    br
+    .post_requests
+      | POST Requests
+      br
+      |     
+      button#query_button Send an HTTP POST request for querying a specific item
+      |     
+      button#post_button Send an HTTP POST request to a page
+      |     
+      button#put_button_add Send an HTTP PUT request to add an att
+      |     
+      button#put_button_remove Send an HTTP PUT request to remove an att
+      |     
+      button#delete_button Send an HTTP DELETE request to a page
