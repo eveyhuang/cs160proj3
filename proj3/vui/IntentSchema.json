@@ -1,11 +1,20 @@
 {
   "intents": [
     {
-      "intent": "SelectKnownRecipeIntent",
+      "intent": "SelectKnownFoodRecipeIntent",
       "slots": [
       {
         "name" : "Recipe",
-        "type": "LIST_OF_KNOWN_RECIPES"
+        "type": "AMAZON.Food",
+      }
+     ]
+    },
+    {
+      "intent": "SelectKnownDessertRecipeIntent",
+      "slots": [
+      {
+        "name" : "Recipe",
+        "type": "AMAZON.Dessert",
       }
      ]
     },
