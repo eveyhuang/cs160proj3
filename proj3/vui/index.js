@@ -3,14 +3,19 @@
 const doc = require('dynamodb-doc');
 
 const dynamo = new doc.DynamoDB();
+
 var recipes_dict = {};
+
 // Route the incoming request based on type (LaunchRequest, IntentRequest,
 // etc.) The JSON body of the request is provided in the event parameter.
 exports.handler = function (event, context) {
     try {
         console.log("event.session.application.applicationId=" + event.session.application.applicationId);
 
-        dynamo.scan({TableName : "Recipes"}, function(err, data) {
+        var params = {
+            TableName: "Recipes"
+        };
+        dynamo.scan(params, function(err, data) {
             if (err) {
                 context.fail("something went wrong with getting the table");
             }
@@ -161,8 +166,8 @@ function handleMainMenuRequest(intent, session, callback) {
     }
 
     var params = {
-        TableName : "Recipes",
-        Key : {
+        TableName: "Recipes",
+        Key: {
             "RecipeName": item
         },
     };
@@ -177,6 +182,7 @@ function handleMainMenuRequest(intent, session, callback) {
             recipe = data;
         }
     });
+    console.log(recipes_dict);
     console.log(recipe);
 
     if (recipe) {
