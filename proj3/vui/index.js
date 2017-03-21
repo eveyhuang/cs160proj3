@@ -221,7 +221,7 @@ function handleRecipeDialogRequest(intent, session, callback) {
         delete session.attributes.isIngredientsList;
     } else if ("GetRecipeDirectionsIntent" === intent.name) {
         // Jump right into recipe request
-        speechOutput += "Okay, I'll read off steps from the recipe. "
+        speechOutput += "Okay, I'll read off ingredients from the recipe. "
             + "Please say next to go through the list or say 'what can I do?' for further assistance. ";
             delete session.attributes.isRecipeDialog;
             delete session.attributes.isIngredientsList;
