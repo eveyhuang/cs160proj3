@@ -294,14 +294,14 @@ function handleRecipeDirectionsRequest(intent, session, callback) {
             session.attributes.isRecipeList = true;
         } else {
             // Progress through the list based on response
-            var sample = -1
+            var sample = -1;
             if ("GetRecipeDirectionsIntent" === intent.name) { // if they say get recipe intent, treat like "next" intent
                 sample = getIndex("AMAZON.NextIntent", session.attributes.index, session.attributes.directions.length);
             } else {
                 sample = getIndex(intent.name, session.attributes.index, session.attributes.directions.length);
             }
             var index = session.attributes.index;
-            if (index <= session.attributes.ingredients.length) {
+            if (index <= session.attributes.directions.length) {
                 speechOutput += session.attributes.directions[index];
                 session.attributes.index = sample;
             } else {
