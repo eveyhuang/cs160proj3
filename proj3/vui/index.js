@@ -182,7 +182,7 @@ function handleMainMenuRequest(intent, session, callback) {
         console.log("Ingredients", session.attributes.ingredients);
         console.log("Directions", session.attributes.directions);
 
-        session.attributes.index = 0;
+        session.attributes.index = -1;
         // will be used to signify that the user is going through the ingredients list
         session.attributes.isIngredientsList = false;
         var reprompt = session.attributes.repromptText,
