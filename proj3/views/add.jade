@@ -15,30 +15,32 @@ block content
             i.fa-li.fa.fa-plus
             a(href='add') Add
 
-  p Add a Recipe
+  h2 Add a Recipe
 
-
-
+  div.form(style='margin-left: 25%;margin-right:25%;width: 50%;')
+    form(name="add-recipe", id="recipeform")
+        div.input(style='margin-left: 25%;margin-right:25%;width: 50%;')
+            span.label Recipe Name
+            br
+            input(type="text", name="recipename", id="rn")
+        br
+        div.input(style='margin-left: 25%;margin-right:25%;width: 50%;')
+            span.label Ingredients List (one per line)
+            textarea(name="inglist", id="il", cols="40", rows="5")
+        br
+        div.input(style='margin-left: 25%;margin-right:25%;width: 50%;')
+            span.label Preparation Steps (one per line)
+            textarea(name="steps", id="ps" cols="40", rows="5")
+        br
+        div.input(style='margin-left: 25%;margin-right:25%;width: 50%;')
+            span.label Recipe Picture
+            br
+            input(type="file", name="imageSRC", id="is")
+        br
 
   .post_requests
-    |     
-    button#post_button Add recipe
-
-
-
-  form(name="add-recipe", id="recipeform")
-      div.input
-          span.label Recipe Name
-          input(type="text", name="recipename", id="rn")
-      div.input
-          span.label Ingredients List (one per line)
-          textarea(name="inglist", id="il", cols="40", rows="5")
-      div.input
-          span.label Preparation Steps (one per line)
-          textarea(name="steps", id="ps" cols="40", rows="5")
-      div.input
-          span.label Recipe Picture
-          input(type="file", name="imageSRC", id="is")
+  |     
+  button#post_button Add recipe
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
   script.
