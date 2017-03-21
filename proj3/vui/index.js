@@ -302,16 +302,14 @@ function handleRecipeDirectionsRequest(intent, session, callback) {
                 sample = getIndex(intent.name, session.attributes.index, session.attributes.directions.length);
             }
             var index = session.attributes.index;
-            if (index == sample) { // no change?
-                if (index >= session.attributes.ingredients.length) {
-                    speechOutput += "This is the end of the recipe. "
-                        + "You can go back to the recipe by saying 'start over'. "
-                        + "If you are done, please say quit. ";
-                }
-                // if first then just repeat it
-            }
-            speechOutput += session.attributes.directions[sample];
-            session.attributes.index = sample;
+            if (index != sample || index < session.attributes.ingredients.length) {
+                speechOutput += session.attributes.directions[sample];
+                session.attributes.index = sample;
+            } else {
+                speechOutput += "This is the end of the recipe. "
+                    + "You can go back to the recipe by saying 'start over'. "
+                    + "If you are done, please say quit. ";
+            }      
         }
     }
 
