@@ -408,7 +408,7 @@ function getIndex(intentName, index, maxLength) {
     if ("AMAZON.StartOverIntent" === intentName) {
         i = 0;
     } else if ("AMAZON.NextIntent" === intentName) {
-        i = Math.min(maxLength - 1, index + 1);
+        i = index + 1;
     } else if ("AMAZON.PreviousIntent" === intentName) {
         i = Math.max(0, index - 1);
     } else if ("LastItemIntent" === intentName) {
