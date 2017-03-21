@@ -35,6 +35,7 @@ GetRecipeDirectionsIntent next recipe
 LastItemIntent last
 LastItemIntent last ingredient
 LastItemIntent last recipe
+LastItemIntent last direction
 
 AMAZON.HelpIntent what can I say
 AMAZON.HelpIntent what can I do

@@ -193,7 +193,7 @@ function handleMainMenuRequest(intent, session, callback) {
             buildSpeechletResponse(CARD_TITLE, speechOutput, reprompt, false));
     } else {
         var reprompt = session.attributes.repromptText,
-            speechOutput = "I do not believe I have that recipe. " + reprompt;
+            speechOutput = "I do not believe I have a recipe for " + item + ". " + reprompt;
         callback(session.attributes,
             buildSpeechletResponse(CARD_TITLE, speechOutput, reprompt, false));
     }
