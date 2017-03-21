@@ -21,10 +21,8 @@ exports.handler = function (event, context) {
                 context.fail("something went wrong with getting the table");
             }
             for (var i in data.Items) {
-                i = data.Items[i];
-                const name = i['RecipeName'].toLowerCase();
-                recipes_dict[name] = i;
-                console.log(JSON.stringify(i));
+                item = data.Items[i];
+                recipes_dict[item['RecipeName'].toLowerCase()] = item;
             }
         });
 
@@ -174,11 +172,13 @@ function handleMainMenuRequest(intent, session, callback) {
         JSON.stringify(recipe);
         session.attributes.isRecipeDialog = true;
         session.attributes.recipe = item;
-        // Probably would be a list of ingredients instead of hard coded list
-        session.attributes.ingredients = recipe["Ingredients"].split("\n");
 
-        // Probably would be a list of directions instead of hard coded list
+        session.attributes.ingredients = recipe["Ingredients"].split("\n");
         session.attributes.directions = recipe["Directions"].split("\n");
+
+        console.log("Ingredients", session.attributes.ingredients);
+        console.log("Directions", session.attributes.directions);
+
         session.attributes.index = 0;
         // will be used to signify that the user is going through the ingredients list
         session.attributes.isIngredientsList = false;
@@ -234,6 +234,7 @@ function handleRecipeDialogRequest(intent, session, callback) {
         } else {
             // Progress through the list based on response
             var sample = -1
+            console.log(session.attributes.ingredients);
             if (session.attributes.isRecipeList) { // if they say get recipe intent, treat like "next" intent
                 sample = getIndex("AMAZON.NextIntent", session.attributes.index, session.attributes.ingredients.length);
             } else {
@@ -253,6 +254,7 @@ function handleRecipeDialogRequest(intent, session, callback) {
                 }
                 // don't need to check for first cause we will just repeat it
             }
+            //  Adds the ingredient to the output here
             speechOutput += session.attributes.ingredients[sample];
             session.attributes.index = sample;
         }
