@@ -169,13 +169,6 @@ function handleMainMenuRequest(intent, session, callback) {
     }
 
     var recipe = recipes_dict[item.toLowerCase()];
-    console.log(recipes_dict);
-    console.log(item);
-    console.log(item.toLowerCase());
-    console.log(recipes_dict["potato dahl"]);
-    console.log(recipes_dict[item]);
-    console.log(recipes_dict[item.toLowerCase()]);
-    console.log(Object.keys(recipes_dict));
 
     if (recipe) {
         // We have a valid recipe item, so we need to set it so we'll actually go there now
@@ -193,7 +186,8 @@ function handleMainMenuRequest(intent, session, callback) {
         // will be used to signify that the user is going through the ingredients list
         session.attributes.isIngredientsList = false;
         var reprompt = session.attributes.repromptText,
-            speechOutput = "I found the recipe you are looking for. "
+            speechOutput = "I found a recipe for "
+                + item + " . "
                 + "Do you want to start with ingredients or with the recipe? ";
         callback(session.attributes,
             buildSpeechletResponse(CARD_TITLE, speechOutput, reprompt, false));
@@ -236,6 +230,7 @@ function handleRecipeDialogRequest(intent, session, callback) {
             session.attributes.isRecipeDirectionsDialog = true;
             session.attributes.isRecipeList = true;
     } else {
+        index = session.attributes.index;
         // Check if user has just stated they wanted to go through ingredients
         if ("GetIngredientsIntent" === intent.name && !session.attributes.isIngredientsList) {
             speechOutput += "I'll go through the ingredients list. "
@@ -251,7 +246,7 @@ function handleRecipeDialogRequest(intent, session, callback) {
                 sample = getIndex(intent.name, session.attributes.index, session.attributes.ingredients.length);
             }
             if (index == sample) {
-                if (index == session.attributes.ingredients.length - 1) {
+                if (index >= session.attributes.ingredients.length) {
                 // if we are at the end, we tell the user we are moving on
                 speechOutput += "Now, I'll read off steps from the recipe. "
                     + "Please say next to go through the list or say 'what can I do?' for further assistance. ";
