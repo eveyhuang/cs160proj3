@@ -40,7 +40,6 @@ LastItemIntent last direction
 AMAZON.HelpIntent what can I say
 AMAZON.HelpIntent what can I do
 
-AMAZON.StopIntent quit
 AMAZON.StopIntent main menu
 
 AMAZON.StartOverIntent start again
