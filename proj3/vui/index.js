@@ -6,27 +6,11 @@ const doc = require('dynamodb-doc');
 
 const dynamo = new doc.DynamoDB();
 
-var recipes_dict = {};
-
 // Route the incoming request based on type (LaunchRequest, IntentRequest,
 // etc.) The JSON body of the request is provided in the event parameter.
 exports.handler = function (event, context) {
     try {
         console.log("event.session.application.applicationId=" + event.session.application.applicationId);
-        var params = {
-            TableName: "Recipes"
-        };
-        // adapted code from piazza post
-        dynamo.scan(params, function(err, data) {
-            if (err) {
-                context.fail("something went wrong with getting the table");
-            }
-            for (var item in data.Items) {
-                item = data.Items[item];
-                const name = item['RecipeName'];
-                recipes_dict[name] = item;
-            }
-        });
 
         /**
          * Uncomment this if statement and populate with your skill's application ID to
@@ -167,6 +151,23 @@ function handleMainMenuRequest(intent, session, callback) {
         var item = intent.slots.FoodRecipe.value;
     }
 
+    var params = {
+        TableName: "Recipes"
+    };
+
+    var recipes_dict = {};
+
+    // adapted code from piazza post
+    dynamo.scan(params, function(err, data) {
+        if (err) {
+            console.log("Failed to get data", err);
+        }
+        for (var item in data.Items) {
+            item = data.Items[item];
+            const name = item['RecipeName'].toLowerCase();
+            recipes_dict[name] = item;
+        }
+    });
     var recipe = recipes_dict[item.toLowerCase()];
 
     if (recipe) {
