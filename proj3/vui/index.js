@@ -230,7 +230,7 @@ function handleRecipeDialogRequest(intent, session, callback) {
             session.attributes.isRecipeDirectionsDialog = true;
             session.attributes.isRecipeList = true;
     } else {
-        index = session.attributes.index;
+        var index = session.attributes.index;
         // Check if user has just stated they wanted to go through ingredients
         if ("GetIngredientsIntent" === intent.name && !session.attributes.isIngredientsList) {
             speechOutput += "I'll go through the ingredients list. "
@@ -238,7 +238,7 @@ function handleRecipeDialogRequest(intent, session, callback) {
             session.attributes.isIngredientsList = true;
         } else {
             // Progress through the list based on response
-            var sample = -1
+            var sample = -1;
             console.log(session.attributes.ingredients);
             if (session.attributes.isRecipeList) { // if they say get recipe intent, treat like "next" intent
                 sample = getIndex("AMAZON.NextIntent", session.attributes.index, session.attributes.ingredients.length);
@@ -305,7 +305,7 @@ function handleRecipeDirectionsRequest(intent, session, callback) {
             }
             var index = session.attributes.index;
             if (index == sample) { // no change?
-                if (index == session.attributes.ingredients.length - 1) {
+                if (index >= session.attributes.ingredients.length) {
                 speechOutput += "This is the end of the recipe. "
                     + "You can go back to the recipe by saying 'start over'. "
                     + "If you are done, please say quit. ";
