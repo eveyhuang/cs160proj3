@@ -226,7 +226,7 @@ function handleRecipeDialogRequest(intent, session, callback) {
             delete session.attributes.isRecipeDialog;
             delete session.attributes.isIngredientsList;
             delete session.attributes.ingredients;
-            session.attributes.index = 0;
+            session.attributes.index = -1;
             session.attributes.isRecipeDirectionsDialog = true;
             session.attributes.isRecipeList = true;
     } else {
@@ -244,9 +244,9 @@ function handleRecipeDialogRequest(intent, session, callback) {
             } else {
                 sample = getIndex(intent.name, session.attributes.index, session.attributes.ingredients.length);
             }
-            if (index <= session.attributes.ingredients.length) {
+            if (sample < session.attributes.ingredients.length) {
                 //  Adds the ingredient to the output here
-                speechOutput += session.attributes.ingredients[index];
+                speechOutput += session.attributes.ingredients[sample];
                 session.attributes.index = sample;
             } else {
                 // if we are at the end, we tell the user we are moving on
@@ -255,7 +255,7 @@ function handleRecipeDialogRequest(intent, session, callback) {
                 delete session.attributes.isRecipeDialog;
                 delete session.attributes.isIngredientsList;
                 delete session.attributes.ingredients;
-                session.attributes.index = 0;
+                session.attributes.index = -1;
                 session.attributes.isRecipeDirectionsDialog = true;
                 session.attributes.isRecipeList = true;
             }
@@ -301,8 +301,8 @@ function handleRecipeDirectionsRequest(intent, session, callback) {
                 sample = getIndex(intent.name, session.attributes.index, session.attributes.directions.length);
             }
             var index = session.attributes.index;
-            if (index <= session.attributes.directions.length) {
-                speechOutput += session.attributes.directions[index];
+            if (sample < session.attributes.directions.length) {
+                speechOutput += session.attributes.directions[sample];
                 session.attributes.index = sample;
             } else {
                 speechOutput += "This is the end of the recipe. "
