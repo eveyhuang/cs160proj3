@@ -6,12 +6,13 @@ const doc = require('dynamodb-doc');
 
 const dynamo = new doc.DynamoDB();
 
+var recipes_dict = {};
+
 // Route the incoming request based on type (LaunchRequest, IntentRequest,
 // etc.) The JSON body of the request is provided in the event parameter.
 exports.handler = function (event, context) {
     try {
         console.log("event.session.application.applicationId=" + event.session.application.applicationId);
-
         /**
          * Uncomment this if statement and populate with your skill's application ID to
          * prevent someone else from configuring a skill that sends requests to this function.
@@ -19,6 +20,22 @@ exports.handler = function (event, context) {
         if (event.session.application.applicationId !== "amzn1.ask.skill.285c82d7-ea01-4b7f-96bd-9cd3f813fae0") {
             context.fail("Invalid Application ID");
         }
+
+        var params = {
+            TableName: "Recipes"
+        };
+
+        // adapted code from piazza post
+        dynamo.scan(params, function(err, data) {
+            if (err) {
+                console.log("Failed to get data", err);
+            }
+            for (var item in data.Items) {
+                item = data.Items[item];
+                const name = item['RecipeName'].toLowerCase();
+                recipes_dict[name] = item;
+            }
+        });
 
         if (event.session.new) {
             onSessionStarted({requestId: event.request.requestId}, event.session);
@@ -150,24 +167,6 @@ function handleMainMenuRequest(intent, session, callback) {
     } else {
         var item = intent.slots.FoodRecipe.value;
     }
-
-    var params = {
-        TableName: "Recipes"
-    };
-
-    var recipes_dict = {};
-
-    // adapted code from piazza post
-    dynamo.scan(params, function(err, data) {
-        if (err) {
-            console.log("Failed to get data", err);
-        }
-        for (var item in data.Items) {
-            item = data.Items[item];
-            const name = item['RecipeName'].toLowerCase();
-            recipes_dict[name] = item;
-        }
-    });
 
     var recipe = recipes_dict[item.toLowerCase()];
     console.log(recipes_dict);
