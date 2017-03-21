@@ -16,13 +16,15 @@ exports.handler = function (event, context) {
         var params = {
             TableName: "Recipes"
         };
+        // adapted code from piazza post
         dynamo.scan(params, function(err, data) {
             if (err) {
                 context.fail("something went wrong with getting the table");
             }
-            for (var i in data.Items) {
-                item = data.Items[i];
-                recipes_dict[item['RecipeName'].toLowerCase()] = item;
+            for (var item in data.Items) {
+                item = data.Items[item];
+                const name = item['RecipeName'];
+                recipes_dict[name] = item;
             }
         });
 
