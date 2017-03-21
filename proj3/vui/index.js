@@ -1,5 +1,7 @@
 'use strict';
 
+console.log("Loading");
+
 const doc = require('dynamodb-doc');
 
 const dynamo = new doc.DynamoDB();
@@ -12,10 +14,12 @@ exports.handler = function (event, context) {
     try {
         console.log("event.session.application.applicationId=" + event.session.application.applicationId);
 
+        console.log("Before:", recipes_dict);
         var params = {
             TableName: "Recipes"
         };
         dynamo.scan(params, function(err, data) {
+            console.log("Why would you not be called???");
             if (err) {
                 context.fail("something went wrong with getting the table");
             }
@@ -26,6 +30,7 @@ exports.handler = function (event, context) {
                 console.log(JSON.stringify(i));
             }
         });
+        console.log("After:", recipes_dict);
         /**
          * Uncomment this if statement and populate with your skill's application ID to
          * prevent someone else from configuring a skill that sends requests to this function.
@@ -172,16 +177,8 @@ function handleMainMenuRequest(intent, session, callback) {
         },
     };
 
-    var recipe = false;
-    console.log("Trying");
-    dynamo.getItem(params, function(err, data) {
-        if (err) {
-            throw("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
-            recipe = data;
-        }
-    });
+    var recipe = recipes_dict[item];
+    console.log(item);
     console.log(recipes_dict);
     console.log(recipe);
 
