@@ -17,24 +17,22 @@ block content
 
   h2 Add a Recipe
 
-  div.form(style='margin-left: 25%;margin-right:25%;width: 50%;')
+  div.form
     form(name="add-recipe", id="recipeform")
-        div.input(style='margin-left: 25%;margin-right:25%;width: 50%;')
-            span.label Recipe Name
-            br
+        div.input
+            div.label Recipe Name
             input(type="text", name="recipename", id="rn")
         br
-        div.input(style='margin-left: 25%;margin-right:25%;width: 50%;')
-            span.label Ingredients List (one per line)
+        div.input
+            div.label Ingredients List (one per line)
             textarea(name="inglist", id="il", cols="40", rows="5")
         br
-        div.input(style='margin-left: 25%;margin-right:25%;width: 50%;')
-            span.label Preparation Steps (one per line)
+        div.input
+            div.label Preparation Steps (one per line)
             textarea(name="steps", id="ps" cols="40", rows="5")
         br
-        div.input(style='margin-left: 25%;margin-right:25%;width: 50%;')
-            span.label Recipe Picture
-            br
+        div.input
+            div.label Recipe Picture
             input(type="file", name="imageSRC", id="is")
         br
 

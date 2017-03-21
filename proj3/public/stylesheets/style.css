@@ -11,6 +11,25 @@ a {
     color: black;
 }
 
+/* Borrowed from w3schools */
+button {
+    background-color: white;
+    border: 2px solid #e7e7e7; /* gray */
+    color: black;
+    padding: 14px 28px;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* For Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e7e7e7; /* gray */
+}
+
 .image img {
     display:inline-block;
     height: auto;
@@ -27,6 +46,26 @@ a {
 .allcards {
     margin: 30px;
 }
+
+.form {
+    display:inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 40%;
+    min-width: 500px;
+    margin: 20px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.form .input {
+    padding: 10px;
+}
+
+.form .label {
+    margin-bottom: 5px;
+}
+
 .card1 {
     display:inline-block;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -53,7 +92,6 @@ a {
     text-align: center;
     border-radius: 5px;
 }
-
 
 .card1 img {
     height: auto;
@@ -121,6 +159,7 @@ h3 {
 
 .list .dish {
     font-size: 25px;
+    padding: 10px;
 }
 
 .list li {
