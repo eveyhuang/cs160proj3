@@ -245,23 +245,21 @@ function handleRecipeDialogRequest(intent, session, callback) {
             } else {
                 sample = getIndex(intent.name, session.attributes.index, session.attributes.ingredients.length);
             }
-            if (index == sample) {
-                if (index >= session.attributes.ingredients.length) {
+            if (index != sample || index < session.attributes.ingredients.length) {
+                //  Adds the ingredient to the output here
+                speechOutput += session.attributes.ingredients[sample];
+                session.attributes.index = sample;
+            } else {
                 // if we are at the end, we tell the user we are moving on
                 speechOutput += "Now, I'll read off steps from the recipe. "
                     + "Please say next to go through the list or say 'what can I do?' for further assistance. ";
-                    delete session.attributes.isRecipeDialog;
-                    delete session.attributes.isIngredientsList;
-                    delete session.attributes.ingredients;
-                    session.attributes.index = 0;
-                    session.attributes.isRecipeDirectionsDialog = true;
-                    session.attributes.isRecipeList = true;
-                }
-                // don't need to check for first cause we will just repeat it
+                delete session.attributes.isRecipeDialog;
+                delete session.attributes.isIngredientsList;
+                delete session.attributes.ingredients;
+                session.attributes.index = 0;
+                session.attributes.isRecipeDirectionsDialog = true;
+                session.attributes.isRecipeList = true;
             }
-            //  Adds the ingredient to the output here
-            speechOutput += session.attributes.ingredients[sample];
-            session.attributes.index = sample;
         }
     }
 
@@ -306,9 +304,9 @@ function handleRecipeDirectionsRequest(intent, session, callback) {
             var index = session.attributes.index;
             if (index == sample) { // no change?
                 if (index >= session.attributes.ingredients.length) {
-                speechOutput += "This is the end of the recipe. "
-                    + "You can go back to the recipe by saying 'start over'. "
-                    + "If you are done, please say quit. ";
+                    speechOutput += "This is the end of the recipe. "
+                        + "You can go back to the recipe by saying 'start over'. "
+                        + "If you are done, please say quit. ";
                 }
                 // if first then just repeat it
             }
