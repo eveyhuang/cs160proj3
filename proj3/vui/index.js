@@ -292,8 +292,8 @@ function handleRecipeDirectionsRequest(intent, session, callback) {
     } else {
         // Check if user has just stated they wanted to go through the recipe
         if ("GetRecipeDirectionsIntent" === intent.name && !session.attributes.isRecipeList) {
-            speechOutput += "I'll go through the recipes list. "
-                + "Please say next to go through the list or say 'what can I do?' for further assistance. "
+            speechOutput += "I'll go through the recipe's directions for " + session.attributes.recipe + ". "
+                + "Please say next to go through the directions or say 'what can I do?' for further assistance. "
             session.attributes.isRecipeList = true;
         } else {
             // Progress through the list based on response
