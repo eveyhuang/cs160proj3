@@ -239,15 +239,14 @@ function handleRecipeDialogRequest(intent, session, callback) {
         } else {
             // Progress through the list based on response
             var sample = -1;
-            console.log(session.attributes.ingredients);
-            if (session.attributes.isRecipeList) { // if they say get recipe intent, treat like "next" intent
+            if ("GetIngredientsIntent" === intent.name) { // if they say get ingredients intent, treat like "next" intent
                 sample = getIndex("AMAZON.NextIntent", session.attributes.index, session.attributes.ingredients.length);
             } else {
                 sample = getIndex(intent.name, session.attributes.index, session.attributes.ingredients.length);
             }
-            if (index != sample || index < session.attributes.ingredients.length) {
+            if (index <= session.attributes.ingredients.length) {
                 //  Adds the ingredient to the output here
-                speechOutput += session.attributes.ingredients[sample];
+                speechOutput += session.attributes.ingredients[index];
                 session.attributes.index = sample;
             } else {
                 // if we are at the end, we tell the user we are moving on
@@ -296,14 +295,14 @@ function handleRecipeDirectionsRequest(intent, session, callback) {
         } else {
             // Progress through the list based on response
             var sample = -1
-            if (session.attributes.isRecipeList) { // if they say get recipe intent, treat like "next" intent
+            if ("GetRecipeDirectionsIntent" === intent.name) { // if they say get recipe intent, treat like "next" intent
                 sample = getIndex("AMAZON.NextIntent", session.attributes.index, session.attributes.directions.length);
             } else {
                 sample = getIndex(intent.name, session.attributes.index, session.attributes.directions.length);
             }
             var index = session.attributes.index;
-            if (index != sample || index < session.attributes.ingredients.length) {
-                speechOutput += session.attributes.directions[sample];
+            if (index <= session.attributes.ingredients.length) {
+                speechOutput += session.attributes.directions[index];
                 session.attributes.index = sample;
             } else {
                 speechOutput += "This is the end of the recipe. "
