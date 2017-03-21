@@ -3,18 +3,25 @@ SelectKnownFoodRecipeIntent I'd like to make {FoodRecipe}
 SelectKnownFoodRecipeIntent let's make {FoodRecipe}
 SelectKnownFoodRecipeIntent I want to make {FoodRecipe}
 SelectKnownFoodRecipeIntent get {FoodRecipe}
+SelectKnownFoodRecipeIntent {FoodRecipe}
+SelectKnownFoodRecipeIntent can you find {FoodRecipe}
+SelectKnownFoodRecipeIntent do you have {FoodRecipe}
 
 SelectKnownDessertRecipeIntent find {DessertRecipe}
 SelectKnownDessertRecipeIntent I'd like to make {DessertRecipe}
 SelectKnownDessertRecipeIntent let's make {DessertRecipe}
 SelectKnownDessertRecipeIntent I want to make {DessertRecipe}
 SelectKnownDessertRecipeIntent get {DessertRecipe}
+SelectKnownDessertRecipeIntent {DessertRecipe}
+SelectKnownDessertRecipeIntent can you find {DessertRecipe}
+SelectKnownDessertRecipeIntent do you have {DessertRecipe}
 
 GetIngredientsIntent ingredients 
 GetIngredientsIntent what are the ingredients
 GetIngredientsIntent get ingredients
 GetIngredientsIntent read ingredients
 GetIngredientsIntent start with ingredients
+GetIngredientsIntent next ingredients
 
 GetRecipeDirectionsIntent start with recipe
 GetRecipeDirectionsIntent recipe directions
@@ -23,6 +30,7 @@ GetRecipeDirectionsIntent what are the recipe directions
 GetRecipeDirectionsIntent what is the recipe
 GetRecipeDirectionsIntent get recipe
 GetRecipeDirectionsIntent read recipe
+GetRecipeDirectionsIntent next recipe
 
 LastItemIntent last
 LastItemIntent last ingredient
@@ -33,3 +41,5 @@ AMAZON.HelpIntent what can I do
 
 AMAZON.StopIntent quit
 AMAZON.StopIntent main menu
+
+AMAZON.StartOverIntent start again
