@@ -13,24 +13,21 @@ var recipes_dict = {};
 exports.handler = function (event, context) {
     try {
         console.log("event.session.application.applicationId=" + event.session.application.applicationId);
-
-        console.log("Before:", recipes_dict);
         var params = {
             TableName: "Recipes"
         };
         dynamo.scan(params, function(err, data) {
-            console.log("Why would you not be called???");
             if (err) {
                 context.fail("something went wrong with getting the table");
             }
             for (var i in data.Items) {
                 i = data.Items[i];
-                const name = i['RecipeName'];
+                const name = i['RecipeName'].toLowerCase();
                 recipes_dict[name] = i;
                 console.log(JSON.stringify(i));
             }
         });
-        console.log("After:", recipes_dict);
+
         /**
          * Uncomment this if statement and populate with your skill's application ID to
          * prevent someone else from configuring a skill that sends requests to this function.
@@ -170,17 +167,7 @@ function handleMainMenuRequest(intent, session, callback) {
         var item = intent.slots.FoodRecipe.value;
     }
 
-    var params = {
-        TableName: "Recipes",
-        Key: {
-            "RecipeName": item
-        },
-    };
-
-    var recipe = recipes_dict[item];
-    console.log(item);
-    console.log(recipes_dict);
-    console.log(recipe);
+    var recipe = recipes_dict[item.toLowerCase()];
 
     if (recipe) {
         // We have a valid recipe item, so we need to set it so we'll actually go there now
