@@ -168,7 +168,15 @@ function handleMainMenuRequest(intent, session, callback) {
             recipes_dict[name] = item;
         }
     });
+
     var recipe = recipes_dict[item.toLowerCase()];
+    console.log(recipes_dict);
+    console.log(item);
+    console.log(item.toLowerCase());
+    console.log(recipes_dict["potato dahl"]);
+    console.log(recipes_dict[item]);
+    console.log(recipes_dict[item.toLowerCase()]);
+    console.log(Object.keys(recipes_dict));
 
     if (recipe) {
         // We have a valid recipe item, so we need to set it so we'll actually go there now
